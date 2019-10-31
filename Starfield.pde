@@ -35,24 +35,33 @@ void draw() {
   }
 }
 
+float[] center() {
+  float x, y;
+  if (mousePressed) {
+    x = mouseX;
+    y = mouseY;
+  } else {
+    x = width / 2;
+    y = height / 2;
+  }
+  return new float[]{x, y};
+}
+
 class Particle {
 	protected float x, y, angle, speed;
   protected String word;
   Particle(float angle, float speed, String word) {
-    if (mousePressed) {
-      x = mouseX;
-      y = mouseY;
-    } else {
-      x = width / 2;
-      y = height / 2;
-    }
+    float[] coords = center();
+    x = coords[0];
+    y = coords[1];
     this.angle = angle;
     this.speed = speed;
     this.word = word;
   }
   
   void style() {
-    textSize(dist(x, y, width / 2, height / 2) / 10.0);
+    float[] coords = center();
+    textSize(dist(x, y, coords[0], coords[1]) / 10.0);
     fill(0, 255, 0);
   }
 
